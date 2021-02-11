@@ -35,9 +35,15 @@ public class CityService implements ICityService {
 	}
 
 	@Override
-	public City updateCity(City city) {
-		// TODO Auto-generated method stub
-		return null;
+	public City updateCity(Long id, City city) {
+		Optional<City> result = cityRepository.findById(id);
+		if(result.isEmpty()) {
+			return null;
+		}
+		City updateCity = result.get();
+		updateCity.setName(city.getName());
+		updateCity.setPopulation(city.getPopulation());
+		return cityRepository.save(updateCity);
 	}
 
 	@Override
