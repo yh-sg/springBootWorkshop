@@ -32,5 +32,20 @@ public class EmployeeService {
 		return employee;
 	}
 	
+	public Employee putEmployee(Long id, Employee employee) {
+		Employee u = employees.get(id);
+		if(u==null)
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee not found: id=" + id);
+		u.setName(employee.getName());
+		u.setDepartment(employee.getDepartment());
+		u.setJointDate(employee.getJointDate());
+		employees.put(id, u);
+		return u;
+	}
 	
+	public Employee deleteEmployee(Long id) {
+		if(!employees.containsKey(id))
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee not found: id=" + id);
+		return employees.remove(id);
+	}
 }

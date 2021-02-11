@@ -3,9 +3,11 @@ package springbootWorkshop.RESTful.API.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,5 +37,16 @@ public class EmployeeController {
 	@ResponseBody
 	public Employee createEmployee(@RequestBody Employee employee) {
 		return employeeService.postEmployee(employee);
+	}
+	
+	@PutMapping(value = "/{id}")
+	public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
+		return employeeService.putEmployee(id, employee);
+	}
+	
+	@DeleteMapping(value = "/{id}")
+	public String deleteEmployee(@PathVariable Long id) {
+		employeeService.deleteEmployee(id);
+		return "Deleted successfully id: " + id;
 	}
 }
