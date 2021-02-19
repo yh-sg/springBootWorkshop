@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<h1>Product List</h1>
+
+<h2 th:text="'Product Count: ' + ${products.size()}"></h2>
+
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Price</th>
+	</tr>
+	
+	<tr th:each="product:${products}">
+		<td th:text="${product.name}">name</td>
+		<td th:text="${product.price}">price</td>
+	</tr>
+</table>
