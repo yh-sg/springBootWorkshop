@@ -32,4 +32,8 @@ public class TaskService {
 	public Page<Task> searchByTitleContaining(String title, Pageable pageable) {
 		return repository.findByTitleContaining(title, pageable);
 	}
+	
+	public Page<Task> findByQuery(String title, Pageable pageable) {
+		return repository.findByQuery(title, pageable);
+	}
 }

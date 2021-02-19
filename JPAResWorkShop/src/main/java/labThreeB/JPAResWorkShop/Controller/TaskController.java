@@ -64,4 +64,20 @@ public class TaskController {
 		response.put("totalItems", result.getTotalElements());
 		return response;
 	}
+	
+	@GetMapping("/query/{keyword}")
+		public Map<String, Object> findByQuery(@PathVariable String keyword,	
+				@RequestParam(defaultValue = "0") int page,
+				@RequestParam(defaultValue = "2") int size) {
+				Pageable paging = PageRequest.of(page, size,
+				Sort.by("title").ascending());
+				Page<Task> result = service.findByQuery(keyword, paging);
+				Map<String, Object> response = new HashMap<String, Object>();
+				response.put("content", result.getContent());
+				response.put("currentPage", result.getNumber());
+				response.put("totalPages", result.getTotalPages());
+				response.put("totalItems", result.getTotalElements());
+				return response;
+
+	}
 }
