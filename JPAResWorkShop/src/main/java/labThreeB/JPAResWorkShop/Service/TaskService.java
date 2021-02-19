@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import labThreeB.JPAResWorkShop.Model.Task;
@@ -25,5 +27,9 @@ public class TaskService {
 	
 	public Long countByTitleContaining(String title) {
 		return repository.countByTitleContaining(title);
+	}
+	
+	public Page<Task> searchByTitleContaining(String title, Pageable pageable) {
+		return repository.findByTitleContaining(title, pageable);
 	}
 }
